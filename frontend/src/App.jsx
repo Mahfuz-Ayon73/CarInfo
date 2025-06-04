@@ -27,7 +27,7 @@ function App() {
       image: base64Image,
     };
 
-    const response = await fetch("http://localhost:3000/generate", {
+    const response = await fetch("https://carinfox-7hsh.onrender.com/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
