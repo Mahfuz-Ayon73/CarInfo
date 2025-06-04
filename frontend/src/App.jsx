@@ -38,9 +38,9 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-red-700 py-10 px-4 sm:px-8">
-      <div className="max-w-3xl mx-auto bg-red-800 shadow-2xl rounded-3xl p-8 space-y-6 transition-transform duration-500 hover:scale-105">
-        <h1 className="text-4xl font-extrabold text-center text-white animate-pulse">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-red-900 py-10 px-4 sm:px-8">
+      <div className="max-w-3xl mx-auto bg-black shadow-2xl rounded-3xl p-8 space-y-6 border border-red-700">
+        <h1 className="text-4xl font-extrabold text-center text-red-500 animate-pulse">
           🚗 Car Info Assistant
         </h1>
 
@@ -49,17 +49,17 @@ function App() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Enter prompt about the car (e.g. 'Tell me about Tesla Model S')"
-          className="w-full border border-red-600 bg-red-700 text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 placeholder-red-400 transition-shadow duration-300 hover:shadow-lg"
+          className="w-full border border-red-600 bg-black text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-500 transition-shadow duration-300 hover:shadow-lg"
         />
 
         <input
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
-          className="block w-full text-sm text-red-400 file:mr-4 file:py-2 file:px-4
+          className="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4
               file:rounded-lg file:border-0
               file:text-sm file:font-semibold
-              file:bg-red-600 file:text-white
+              file:bg-black file:text-white
               hover:file:bg-red-700 transition-transform duration-300 hover:scale-105"
         />
 
@@ -72,7 +72,7 @@ function App() {
             />
           </div>
         ) : (
-          <p className="text-center text-red-400">No image selected</p>
+          <p className="text-center text-gray-400">No image selected</p>
         )}
 
         <div className="text-center">
@@ -84,13 +84,13 @@ function App() {
           </button>
         </div>
 
-        <div className="mt-6 bg-red-700 p-6 rounded-lg border border-red-600 shadow-md transition-opacity duration-500 hover:opacity-90">
+        <div className="mt-6 bg-black p-6 rounded-lg border border-red-600 shadow-md transition-opacity duration-500 hover:opacity-90">
           {data ? (
-            <div className="prose prose-invert">
+            <div className="prose prose-invert text-gray-200">
               <ReactMarkdown>{data}</ReactMarkdown>
             </div>
           ) : (
-            <p className="text-red-400 text-center">No data to display yet...</p>
+            <p className="text-gray-500 text-center">No data to display yet...</p>
           )}
         </div>
       </div>
