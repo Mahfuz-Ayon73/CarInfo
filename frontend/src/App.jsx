@@ -5,6 +5,7 @@ function App() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [data, setData] = useState("");
+  const [loading, setLoading] = useState(false); // State for loading spinner
 
   function convertImageToBase64(file) {
     return new Promise((resolve, reject) => {
@@ -16,6 +17,7 @@ function App() {
   }
 
   async function handleSubmit() {
+    setLoading(true); // Show spinner
     let base64Image = null;
 
     if (image) {
@@ -27,14 +29,20 @@ function App() {
       image: base64Image,
     };
 
-    const response = await fetch("https://carinfox-7hsh.onrender.com/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch("https://carinfox-7hsh.onrender.com/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    const result = await response.json();
-    setData(result.data);
+      const result = await response.json();
+      setData(result.data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false); // Hide spinner
+    }
   }
 
   return (
@@ -84,13 +92,20 @@ function App() {
           </button>
         </div>
 
+        {loading && (
+          <div className="text-center mt-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-red-500 mx-auto"></div>
+            <p className="text-gray-400 mt-2">Loading...</p>
+          </div>
+        )}
+
         <div className="mt-6 bg-black p-6 rounded-lg border border-red-600 shadow-md transition-opacity duration-500 hover:opacity-90">
           {data ? (
             <div className="prose prose-invert text-gray-200">
               <ReactMarkdown>{data}</ReactMarkdown>
             </div>
           ) : (
-            <p className="text-gray-500 text-center">No data to display yet...</p>
+            !loading && <p className="text-gray-500 text-center">No data to display yet...</p>
           )}
         </div>
       </div>
